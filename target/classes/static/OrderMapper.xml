@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--
+     PeronMapperImpl  implements  PersonMapper
+
+namespace:  指明对应的接口类，写上全类名
+select: 查询
+insert  增加
+delete  删除
+update  修改
+id ：就是指明对应的接口中的方法名
+resultType： 返回值类型   cn.kgc.entity.Person   int  Integer  _int   java.lang.Integer
+parameterType:参数类型
+
+
+-->
+
+
+
+<mapper namespace="cn.kgc.dao.OrderMapper">
+
+
+    <insert id="saveOrder" parameterType="Order" >
+        insert into `order` (`id`, oid, uid , totalprice)
+        VALUES (#{id},#{oid},#{uid},#{totalprice})
+    </insert>
+
+    <delete id="delOrderById" parameterType="int">
+        delete from `order` where oid = #{oid}
+    </delete>
+
+    <update id="updateOrder" parameterType="Order">
+        update `order` set `id` = #{id},oid = #{oid} ,
+        uid = #{uid} ,totalprice = #{totalprice} where oid = #{oid}
+    </update>
+
+    <select id="getOrderByUid" parameterType="int" resultType="Order">
+        select * from `order` where uid = #{uid}
+    </select>
+
+    <select id="getAll" resultType="Order">
+        select * from `order`
+    </select>
+
+    <select id="getOrderByPage" parameterType="Page"  resultType="Admin">
+        select * from `order` order by `id` asc limit #{index} , #{pageSize}
+    </select>
+
+</mapper>

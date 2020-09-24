@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--
+namespace:
+insert:增加
+delete:删除
+update:修改
+id:指明对应的接口中的方法名
+resultType：返回值类型    如果是一个对象 如返回一个Person类型，要返回全类名
+                                        返回基本类型则可以直接返回
+parameterType:参数类型，与返回值类型用法一样
+-->
+<mapper namespace="cn.kgc.dao.GoodsMapper">
+    <insert id="addGoods" parameterType="Goods">
+        INSERT into goods(gname,gprice,gstock,ginf)
+        VALUES(#{gname},#{gprice},#{gstock},#{ginf});
+    </insert>
+    <delete id="delGoods" parameterType="int">
+        delete from goods where gid = #{gid};
+    </delete>
+    <update id="updateGoods" parameterType="Goods">
+        update goods set `gname` = #{gname},gprice = #{gprice},gstock = #{gstock},ginf = #{ginf}
+        where gid = #{gid}
+    </update>
+    <select id="getGoodsByGid" parameterType="int" resultType="Goods">
+        select * from goods where gid = #{gid}
+    </select>
+    <select id="getGoods" resultType="Goods">
+        select * from goods
+    </select>
+    <select id="getCount" resultType="int">
+        select count(*) from goods
+    </select>
+    <select id="getGoodsByPage" parameterType="Page" resultType="Goods">
+        select * from goods limit #{index},#{pageSize}
+    </select>
+</mapper>

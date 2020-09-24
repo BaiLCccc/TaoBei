@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--
+namespace:
+insert:增加
+delete:删除
+update:修改
+id:指明对应的接口中的方法名
+resultType：返回值类型    如果是一个对象 如返回一个Person类型，要返回全类名
+                                        返回基本类型则可以直接返回
+parameterType:参数类型，与返回值类型用法一样
+-->
+<mapper namespace="cn.kgc.dao.OrderDetailsMapper">
+    <insert id="saveOrderDetails" parameterType="OrderDetails">
+        INSERT into `order_details`(oid,gid,gnum)
+        VALUES(#{oid},#{gid},#{gnum})
+    </insert>
+    <delete id="delOrderDetails" parameterType="int">
+        DELETE from order_details where oid = #{oid}
+    </delete>
+    <update id="updateOrderDetails" parameterType="OrderDetails">
+        update order_details set `gnum` = #{gnum} where gid = #{gid}
+    </update>
+    <select id="getOrderDetailsByOid" resultType="OrderDetails" parameterType="int">
+        select * from order_details where oid = #{oid}
+    </select>
+    <select id="getOrderDetails" resultType="OrderDetails">
+        select * from order_details
+    </select>
+    <select id="getOrderDetailsByPage" parameterType="Page"  resultType="Admin">
+        select * from `order_details` order by `id` asc limit #{index} , #{pageSize}
+    </select>
+</mapper>

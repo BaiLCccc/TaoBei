@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<!--核心配置文件-->
+<configuration>
+    <properties resource="db.properties"></properties>
+
+    <!--<settings>
+        <setting name="" value=""/>
+    </settings>-->
+
+    <!--单个匹配-->
+    <typeAliases>
+        <!--单个-->
+        <!--<typeAlias alias="Person" type="cn.kgc.entity.Person"/>-->
+
+        <!--多个-->
+        <package name="cn.kgc.entity"/>
+    </typeAliases>
+
+    <environments default="development">
+        <environment id="development">
+            <transactionManager type="JDBC"/>
+            <dataSource type="POOLED">
+                <property name="driver" value="${jdbc.driverClass}"/>
+                <property name="url" value="${jdbc.url}"/>
+                <property name="username" value="${jdbc.user}"/>
+                <property name="password" value="${jdbc.password}"/>
+            </dataSource>
+        </environment>
+    </environments>
+    <mappers>
+        <!--
+        <mapper resource="static/PersonMapper.xml"/>
+        <mapper class="cn.kgc.dao.PersonMapperAnotation"/>
+        -->
+        <mapper resource="static/OrderMapper.xml"/>
+        <mapper resource="static/AdminMapper.xml"/>
+        <mapper resource="static/UserMapper.xml"/>
+        <mapper resource="static/OrderDetailsMapper.xml"/>
+        <mapper resource="static/GoodsMapper.xml"/>
+    </mappers>
+</configuration>

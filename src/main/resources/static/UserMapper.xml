@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--
+     PeronMapperImpl  implements  PersonMapper
+
+namespace:  指明对应的接口类，写上全类名
+select: 查询
+insert  增加
+delete  删除
+update  修改
+id ：就是指明对应的接口中的方法名
+resultType： 返回值类型   cn.kgc.entity.Person   int  Integer  _int   java.lang.Integer
+parameterType:参数类型
+
+
+-->
+
+
+
+<mapper namespace="cn.kgc.dao.UserMapper">
+
+    <select id="getUserByUnameAndUpassword" parameterType="User" resultType="User">
+        select * from `user` where uname = #{uname} and upassword = #{upassword}
+    </select>
+
+    <select id="getUserByUname" parameterType="String" resultType="User">
+        select * from `user` where uname = #{uname}
+    </select>
+
+    <insert id="saveUser" parameterType="User" >
+        insert into `user` (`uid`, uname, upassword , uphone, uvalid , udelid)
+        VALUES (#{uid},#{uname},#{upassword},#{uphone},#{uvalid},#{udelid})
+    </insert>
+
+    <delete id="delUser" parameterType="String">
+        delete from `user` where uid = #{uid}
+    </delete>
+
+    <update id="updateUser" parameterType="User">
+        update `user` set uname = #{uname} ,upassword = #{upassword} ,uphone = #{uphone} ,
+        uvalid = #{uvalid} ,udelid = #{udelid} where uid = #{uid}
+    </update>
+
+    <select id="getUserByUid" parameterType="String" resultType="User">
+        select * from `user` where uid = #{uid}
+    </select>
+
+    <select id="getAll" resultType="User">
+        select * from `user`
+    </select>
+
+
+
+    <select id="getSinlvalue"  resultType="String">
+        select count(*) from user
+    </select>
+
+
+    <select id="getUserByPage" parameterType="Page"  resultType="User">
+        select * from `user` order by `uid` asc limit #{index} , #{pageSize}
+    </select>
+
+</mapper>
